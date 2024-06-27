@@ -1,15 +1,3 @@
-import Router from "~/router";
-import { Header } from "./components/Header";
+import { Router } from './Router/Router'
 
-function App() {
-  return (
-    <>
-      <Header>
-        <h1>Caju Front Teste</h1>
-      </Header>
-      <Router />
-    </>
-  );
-}
-
-export default App;
+export const App = Router
