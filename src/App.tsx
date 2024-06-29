@@ -1,3 +1,3 @@
-import { Router } from './Router/Router'
+import { Router } from './router'
 
 export const App = Router
