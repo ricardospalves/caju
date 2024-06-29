@@ -1,4 +1,5 @@
 import { Button } from '~/components/Button'
+import { CPFField } from '~/components/CPFField/CPFField'
 import { TextField } from '~/components/TextField'
 
 export const Form = () => {
@@ -6,7 +7,7 @@ export const Form = () => {
     <form action="" className="grid gap-4">
       <TextField label="Nome" />
       <TextField label="E-mail" inputMode="email" />
-      <TextField label="CPF" inputMode="decimal" />
+      <CPFField label="CPF" />
       <TextField label="Data de admissão" type="date" />
 
       <div className="lg:text-right">
