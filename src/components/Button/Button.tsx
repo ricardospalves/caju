@@ -45,7 +45,7 @@ export const Button = ({
       className={classNames([buttonVariants({ theme, size }), className])}
       {...props}
     >
-      <span>{children}</span>
+      {children}
     </Component>
   )
 }
