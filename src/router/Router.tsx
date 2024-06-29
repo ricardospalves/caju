@@ -1,13 +1,12 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Header } from '~/components/Header'
+import { WebsiteLayout } from '~/layout/Website/Website'
 
 const router = createBrowserRouter([
   {
     element: (
-      <>
-        <Header />
+      <WebsiteLayout>
         <Outlet />
-      </>
+      </WebsiteLayout>
     ),
     children: [
       {
