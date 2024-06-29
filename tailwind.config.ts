@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#ff7500',
-        secondary: '#e80537',
+        cajuPrimary: '#e80537',
+        cajuSecondary: '#ff7500',
       },
     },
   },
