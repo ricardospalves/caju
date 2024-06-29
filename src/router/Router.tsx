@@ -1,6 +1,7 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ROUTES } from '~/constants/routes'
 import { WebsiteLayout } from '~/layout/Website/Website'
+import { DashboardPage } from '~/pages/Dashboard'
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: ROUTES.home,
-        element: <></>,
+        element: <DashboardPage />,
       },
     ],
   },
