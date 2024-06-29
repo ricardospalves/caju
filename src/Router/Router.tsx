@@ -1,5 +1,5 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Header } from '~/Components/Header/Header'
+import { Header } from '~/Components/Header'
 
 const router = createBrowserRouter([
   {
