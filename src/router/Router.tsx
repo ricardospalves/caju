@@ -2,6 +2,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ROUTES } from '~/constants/routes'
 import { WebsiteLayout } from '~/layout/Website/Website'
 import { DashboardPage } from '~/pages/Dashboard'
+import { NewUserPage } from '~/pages/NewUser'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.home,
         element: <DashboardPage />,
+      },
+      {
+        path: ROUTES.newUser,
+        element: <NewUserPage />,
       },
     ],
   },

@@ -7,6 +7,9 @@ const root = path.resolve(__dirname, 'src')
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['react-icons'],
+  },
   resolve: {
     alias: {
       '~': root,
