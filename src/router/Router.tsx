@@ -1,4 +1,5 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { ROUTES } from '~/constants/routes'
 import { WebsiteLayout } from '~/layout/Website/Website'
 
 const router = createBrowserRouter([
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/',
+        path: ROUTES.home,
         element: <></>,
       },
     ],
