@@ -1,0 +1,51 @@
+import type { VariantProps } from 'tailwind-variants'
+
+import { ButtonHTMLAttributes } from 'react'
+import { tv } from 'tailwind-variants'
+import { ButtonSlot, type AsChildProps } from './ButtonSlot.tsx'
+import { classNames } from '~/utils/class-names.ts'
+
+const buttonVariants = tv({
+  base: 'inline-flex items-center justify-center rounded-full cursor-pointer text-center font-semibold transition-colors focus:outline-none focus:ring focus:ring-cajuPrimary/25',
+  variants: {
+    theme: {
+      primary:
+        'text-primaryContrast bg-primary hover:bg-primaryDark focus-visible:bg-primaryDark',
+    },
+    size: {
+      medium: 'py-2 px-8 text-base',
+      small: 'py-1 px-4 text-xs',
+    },
+  },
+  defaultVariants: {
+    theme: 'primary',
+    size: 'medium',
+  },
+})
+
+export type ButtonProps = AsChildProps<
+  ButtonHTMLAttributes<HTMLButtonElement>
+> &
+  VariantProps<typeof buttonVariants> & {
+    className?: string
+  }
+
+export const Button = ({
+  asChild,
+  theme,
+  size,
+  className,
+  children,
+  ...props
+}: ButtonProps) => {
+  const Component = asChild ? ButtonSlot : 'button'
+
+  return (
+    <Component
+      className={classNames([buttonVariants({ theme, size }), className])}
+      {...props}
+    >
+      <span>{children}</span>
+    </Component>
+  )
+}

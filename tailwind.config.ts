@@ -7,6 +7,10 @@ export default {
       colors: {
         cajuPrimary: '#e80537',
         cajuSecondary: '#ff7500',
+        primary: '#64a98c',
+        primaryDark: '#467662',
+        primaryLight: '#93c3af',
+        primaryContrast: '#fff',
       },
     },
   },
