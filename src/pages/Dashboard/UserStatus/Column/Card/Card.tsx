@@ -4,6 +4,8 @@ import {
   HiOutlineCalendar as CalendarIcon,
 } from 'react-icons/hi'
 import { RegistrationCard } from '~/components/RegistrationCard'
+import { deleteRegistrationById } from '~/services/deleteRegistrationById'
+import { useDashboardStore } from '~/stores/useDashboardStore'
 
 export type CardProps = {
   id: string
@@ -14,6 +16,8 @@ export type CardProps = {
 }
 
 export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
+  const { users, setUsers } = useDashboardStore((state) => state)
+
   return (
     <RegistrationCard.Root key={id}>
       <RegistrationCard.List>
@@ -67,8 +71,17 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
         )}
 
         <RegistrationCard.DeleteButton
-          onClick={() => {
-            console.log('DELETE', id)
+          onClick={async () => {
+            const response = await deleteRegistrationById(id)
+            const deletedUser = response.data
+            const usersCopy = [...users]
+            const userIndex = usersCopy.findIndex(
+              ({ id }) => id === deletedUser.id,
+            )
+
+            usersCopy.splice(userIndex, 1)
+
+            setUsers(usersCopy)
           }}
         />
       </RegistrationCard.ActionsBar>
