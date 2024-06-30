@@ -11,6 +11,11 @@ const buttonVariants = tv({
     theme: {
       primary:
         'text-primaryContrast bg-primary hover:bg-primaryDark focus-visible:bg-primaryDark',
+      danger: 'text-black bg-red-400 hover:bg-red-600 focus-visible:bg-red-600',
+      success:
+        'text-black bg-green-400 hover:bg-green-600 focus-visible:bg-green-600',
+      warning:
+        'text-black bg-yellow-400 hover:bg-yellow-600 focus-visible:bg-yellow-600',
     },
     size: {
       medium: 'py-2 px-8 text-base',
