@@ -2,6 +2,8 @@ import { HiOutlineArrowLeft as ArrowLeftIcon } from 'react-icons/hi'
 import { Form } from './Form'
 import { Link } from 'react-router-dom'
 
+const LINK_TEXT_BACK = 'Voltar'
+
 export const NewUserPage = () => {
   return (
     <main className="grow lg:flex p-2">
@@ -10,7 +12,10 @@ export const NewUserPage = () => {
           <Link
             to="/"
             className="flex items-center justify-center size-10 p-1 border-2 border-current rounded-full transition-colors text-primary hover:text-primaryDark focus-visible:text-primaryDark"
+            title={LINK_TEXT_BACK}
           >
+            <span>{LINK_TEXT_BACK}</span>
+
             <ArrowLeftIcon
               className="block size-full fill-current"
               aria-hidden={true}
