@@ -1,6 +1,6 @@
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
-import { RegistrationCard } from '~/components/RegistrationCard'
+import { Card } from './Card'
 
 const columnVariants = tv({
   base: 'w-full lg:w-auto max-w-[calc(100%-1rem)] lg:max-w-none shrink-0 p-4 rounded-2xl border lg:border-0',
@@ -31,13 +31,15 @@ export const Column = ({ status, users }: ColumnProps) => {
       <h2 className="mb-4 font-bold">{HEADINGS[status]}</h2>
 
       <div className="grid gap-4">
-        {users.map(({ admissionDate, email, employeeName, id }) => {
+        {users.map(({ admissionDate, email, employeeName, id, status }) => {
           return (
-            <RegistrationCard
+            <Card
               key={id}
               admissionDate={admissionDate}
               email={email}
+              id={id}
               name={employeeName}
+              status={status}
             />
           )
         })}
