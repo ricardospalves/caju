@@ -1,5 +1,6 @@
-import { ReactNode } from 'react'
-import { VariantProps, tv } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
+import { RegistrationCard } from '~/components/RegistrationCard'
 
 const columnVariants = tv({
   base: 'w-full lg:w-auto max-w-[calc(100%-1rem)] lg:max-w-none shrink-0 p-4 rounded-2xl border lg:border-0',
@@ -21,14 +22,26 @@ const HEADINGS: Record<ColumnVariants['status'], string> = {
 }
 
 export type ColumnProps = ColumnVariants & {
-  children: ReactNode
+  users: RegistrationUsers
 }
 
-export const Column = ({ children, status }: ColumnProps) => {
+export const Column = ({ status, users }: ColumnProps) => {
   return (
     <section className={columnVariants({ status })}>
       <h2 className="mb-4 font-bold">{HEADINGS[status]}</h2>
-      <div className="grid gap-4">{children}</div>
+
+      <div className="grid gap-4">
+        {users.map(({ admissionDate, email, employeeName, id }) => {
+          return (
+            <RegistrationCard
+              key={id}
+              admissionDate={admissionDate}
+              email={email}
+              name={employeeName}
+            />
+          )
+        })}
+      </div>
     </section>
   )
 }
