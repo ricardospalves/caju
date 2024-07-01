@@ -5,6 +5,7 @@ import {
 } from 'react-icons/hi'
 import { RegistrationCard } from '~/components/RegistrationCard'
 import { deleteRegistrationById } from '~/services/deleteRegistrationById'
+import { updateRegistrationStatusById } from '~/services/updateRegistrationStatusById'
 import { useUserStore } from '~/stores/useUserStore'
 
 export type CardProps = {
@@ -16,7 +17,7 @@ export type CardProps = {
 }
 
 export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
-  const { deleteUserById } = useUserStore((state) => state)
+  const { deleteUserById, setUserStatusById } = useUserStore((state) => state)
 
   return (
     <RegistrationCard.Root key={id}>
@@ -40,8 +41,14 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
         {status !== 'REPROVED' && (
           <RegistrationCard.ActionButton
             theme="danger"
-            onClick={() => {
-              console.log('REPROVED', id)
+            onClick={async () => {
+              const response = await updateRegistrationStatusById(
+                id,
+                'REPROVED',
+              )
+              const user = response.data
+
+              setUserStatusById(id, user.status)
             }}
           >
             Reprovar
@@ -51,8 +58,14 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
         {status !== 'APPROVED' && (
           <RegistrationCard.ActionButton
             theme="success"
-            onClick={() => {
-              console.log('APPROVED', id)
+            onClick={async () => {
+              const response = await updateRegistrationStatusById(
+                id,
+                'APPROVED',
+              )
+              const user = response.data
+
+              setUserStatusById(id, user.status)
             }}
           >
             Aprovar
@@ -62,8 +75,11 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
         {status !== 'REVIEW' && (
           <RegistrationCard.ActionButton
             theme="warning"
-            onClick={() => {
-              console.log('REVIEW', id)
+            onClick={async () => {
+              const response = await updateRegistrationStatusById(id, 'REVIEW')
+              const user = response.data
+
+              setUserStatusById(id, user.status)
             }}
           >
             Revisar novamente
