@@ -16,7 +16,7 @@ export type CardProps = {
 }
 
 export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
-  const { users, setUsers } = useUserStore((state) => state)
+  const { deleteUserById } = useUserStore((state) => state)
 
   return (
     <RegistrationCard.Root key={id}>
@@ -74,14 +74,8 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
           onClick={async () => {
             const response = await deleteRegistrationById(id)
             const deletedUser = response.data
-            const usersCopy = [...users]
-            const userIndex = usersCopy.findIndex(
-              ({ id }) => id === deletedUser.id,
-            )
 
-            usersCopy.splice(userIndex, 1)
-
-            setUsers(usersCopy)
+            deleteUserById(deletedUser.id)
           }}
         />
       </RegistrationCard.ActionsBar>

@@ -5,6 +5,7 @@ type useUserStoreState = {
   filteredUsers: RegistrationUsers | null
   setUsers: (users: RegistrationUsers) => void
   filterByCPF: (cpf?: string) => void
+  deleteUserById: (id: string) => void
 }
 
 export const useUserStore = create<useUserStoreState>((set, get) => {
@@ -30,6 +31,16 @@ export const useUserStore = create<useUserStoreState>((set, get) => {
 
       return set({
         filteredUsers,
+      })
+    },
+    deleteUserById: (id) => {
+      const usersCopy = [...get().users]
+      const userIndex = usersCopy.findIndex((user) => user.id === id)
+
+      usersCopy.splice(userIndex, 1)
+
+      return set({
+        users: usersCopy,
       })
     },
   }
