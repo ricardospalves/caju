@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { ActionBar } from './ActionBar'
 import { UserStatus } from './UserStatus'
 import { getRegistrations } from '~/services/getRegistrations'
-import { useDashboardStore } from '~/stores/useDashboardStore'
+import { useUserStore } from '~/stores/useUserStore'
 
 export const DashboardPage = () => {
-  const { setUsers } = useDashboardStore((state) => state)
+  const { setUsers } = useUserStore((state) => state)
 
   useEffect(() => {
     ;(async () => {

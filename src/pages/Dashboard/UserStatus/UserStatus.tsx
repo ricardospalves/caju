@@ -1,9 +1,9 @@
-import { useDashboardStore } from '~/stores/useDashboardStore'
+import { useUserStore } from '~/stores/useUserStore'
 import { Column } from './Column'
 import { filterUsersByStatus } from '~/utils/filterUsersByStatus'
 
 export const UserStatus = () => {
-  const { users, filteredUsers } = useDashboardStore((state) => state)
+  const { users, filteredUsers } = useUserStore((state) => state)
   const userColumns = filteredUsers || users
 
   return (

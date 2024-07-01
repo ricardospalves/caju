@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
-type useDashboardStoreState = {
+type useUserStoreState = {
   users: RegistrationUsers
   filteredUsers: RegistrationUsers | null
   setUsers: (users: RegistrationUsers) => void
   filterByCPF: (cpf?: string) => void
 }
 
-export const useDashboardStore = create<useDashboardStoreState>((set, get) => {
+export const useUserStore = create<useUserStoreState>((set, get) => {
   return {
     users: [],
     setUsers: (users) => {

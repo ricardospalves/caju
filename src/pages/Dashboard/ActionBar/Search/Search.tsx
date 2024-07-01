@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { CPFField } from '~/components/CPFField/CPFField'
-import { useDashboardStore } from '~/stores/useDashboardStore'
+import { useUserStore } from '~/stores/useUserStore'
 
 export const Search = () => {
   const [cpf, setCpf] = useState('')
-  const { filterByCPF } = useDashboardStore((state) => state)
+  const { filterByCPF } = useUserStore((state) => state)
 
   useEffect(() => {
     const rawCpf = cpf.replace(/\D/g, '')

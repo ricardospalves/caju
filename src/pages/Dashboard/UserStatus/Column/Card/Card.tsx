@@ -5,7 +5,7 @@ import {
 } from 'react-icons/hi'
 import { RegistrationCard } from '~/components/RegistrationCard'
 import { deleteRegistrationById } from '~/services/deleteRegistrationById'
-import { useDashboardStore } from '~/stores/useDashboardStore'
+import { useUserStore } from '~/stores/useUserStore'
 
 export type CardProps = {
   id: string
@@ -16,7 +16,7 @@ export type CardProps = {
 }
 
 export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
-  const { users, setUsers } = useDashboardStore((state) => state)
+  const { users, setUsers } = useUserStore((state) => state)
 
   return (
     <RegistrationCard.Root key={id}>
