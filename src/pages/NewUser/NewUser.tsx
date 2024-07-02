@@ -14,7 +14,7 @@ export const NewUserPage = () => {
             className="flex items-center justify-center size-10 p-1 border-2 border-current rounded-full transition-colors text-primary hover:text-primaryDark focus-visible:text-primaryDark"
             title={LINK_TEXT_BACK}
           >
-            <span>{LINK_TEXT_BACK}</span>
+            <span className="sr-only">{LINK_TEXT_BACK}</span>
 
             <ArrowLeftIcon
               className="block size-full fill-current"

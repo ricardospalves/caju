@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, 'src')
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    include: ['react-icons'],
+    include: ['react-icons', 'uuid'],
   },
   resolve: {
     alias: {
