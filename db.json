@@ -23,6 +23,14 @@
       "employeeName": "Luiz Filho",
       "status": "APPROVED",
       "cpf": "56642105087"
+    },
+    {
+      "id": "8dbf2a9e-e8d1-496b-80a8-fc143995bf60",
+      "admissionDate": "2024-07-11",
+      "cpf": "96161633027",
+      "email": "ricardo@caju.com.br",
+      "employeeName": "Ricardo",
+      "status": "REVIEW"
     }
   ]
 }

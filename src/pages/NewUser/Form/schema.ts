@@ -12,3 +12,5 @@ export const schema = z.object({
     { message: 'CPF inválido.' },
   ),
 })
+
+export type FormFields = z.infer<typeof schema>

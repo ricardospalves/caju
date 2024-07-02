@@ -1,75 +1,48 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
 import { Button } from '~/components/Button'
-import { CPFField } from '~/components/CPFField/CPFField'
-import { TextField } from '~/components/TextField'
-import { schema } from './schema'
-import { z } from 'zod'
+import { schema, FormFields } from './schema'
 import { postRegistration } from '~/services/postRegistration'
 import { User } from '~/entities/User'
-
-type FormFields = z.infer<typeof schema>
+import { toast } from 'react-toastify'
+import { Fields } from './Fields'
 
 export const Form = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormFields>({
+  const notify = () => toast.success('Usuário cadastrado com sucesso!')
+  const form = useForm<FormFields>({
     resolver: zodResolver(schema),
   })
-  const onSubmit = async ({
-    admissionDate,
-    email,
-    employeeName,
-    cpf,
-  }: FormFields) => {
-    cpf = (cpf as string).replace(/\D/g, '')
-
-    const user = new User({
-      admissionDate,
-      email,
-      employeeName,
-      cpf,
-      status: 'REVIEW',
-    })
-
-    await postRegistration(user)
-  }
+  const { handleSubmit } = form
 
   return (
-    <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        label="Nome"
-        {...register('employeeName')}
-        errorMessage={errors.employeeName?.message}
-      />
+    <FormProvider {...form}>
+      <form
+        className="grid gap-4"
+        onSubmit={handleSubmit(
+          async ({ admissionDate, email, employeeName, cpf }: FormFields) => {
+            cpf = (cpf as string).replace(/\D/g, '')
+            const user = new User({
+              admissionDate,
+              email,
+              employeeName,
+              cpf,
+              status: 'REVIEW',
+            })
 
-      <TextField
-        label="E-mail"
-        inputMode="email"
-        {...register('email')}
-        errorMessage={errors.email?.message}
-      />
+            await postRegistration(user)
 
-      <CPFField
-        label="CPF"
-        {...register('cpf')}
-        errorMessage={errors.cpf?.message as string}
-      />
+            notify()
+          },
+        )}
+      >
+        <Fields />
 
-      <TextField
-        label="Data de admissão"
-        type="date"
-        {...register('admissionDate')}
-        errorMessage={errors.admissionDate?.message}
-      />
-
-      <div className="lg:text-right">
-        <Button type="submit" className="w-full lg:w-auto">
-          Cadastrar
-        </Button>
-      </div>
-    </form>
+        <div className="lg:max-w-36 w-full lg:ml-auto">
+          <Button type="submit" className="w-full">
+            Cadastrar
+          </Button>
+        </div>
+      </form>
+    </FormProvider>
   )
 }
