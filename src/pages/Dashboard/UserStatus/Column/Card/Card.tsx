@@ -3,6 +3,7 @@ import {
   HiOutlineUser as UserIcon,
   HiOutlineCalendar as CalendarIcon,
 } from 'react-icons/hi'
+import { toast } from 'react-toastify'
 import { RegistrationCard } from '~/components/RegistrationCard'
 import { deleteRegistrationById } from '~/services/deleteRegistrationById'
 import { updateRegistrationStatusById } from '~/services/updateRegistrationStatusById'
@@ -50,6 +51,16 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
                 const user = response.data
 
                 setUserStatusById(id, user.status)
+                toast.success(
+                  <>
+                    Usuário <strong>{user.employeeName}</strong> movido para o
+                    board{' '}
+                    <strong className="text-approved uppercase">
+                      Aprovado
+                    </strong>
+                    .
+                  </>,
+                )
               }}
             >
               Aprovar
@@ -65,6 +76,16 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
                 const user = response.data
 
                 setUserStatusById(id, user.status)
+                toast.success(
+                  <>
+                    Usuário <strong>{user.employeeName}</strong> movido para o
+                    board{' '}
+                    <strong className="text-reproved uppercase">
+                      Reprovado
+                    </strong>
+                    .
+                  </>,
+                )
               }}
             >
               Reprovar
@@ -80,6 +101,14 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
               const user = response.data
 
               setUserStatusById(id, user.status)
+
+              toast.success(
+                <>
+                  Usuário <strong>{user.employeeName}</strong> movido para o
+                  board{' '}
+                  <strong className="text-review uppercase">Revisão</strong>.
+                </>,
+              )
             }}
           >
             Revisar novamente
