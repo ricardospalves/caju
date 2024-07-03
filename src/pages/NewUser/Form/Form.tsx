@@ -6,8 +6,11 @@ import { postRegistration } from '~/services/postRegistration'
 import { User } from '~/entities/User'
 import { toast } from 'react-toastify'
 import { Fields } from './Fields'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '~/constants/routes'
 
 export const Form = () => {
+  const navigate = useNavigate()
   const notify = () => toast.success('Usuário cadastrado com sucesso!')
   const form = useForm<FormFields>({
     resolver: zodResolver(schema),
@@ -30,6 +33,8 @@ export const Form = () => {
             })
 
             await postRegistration(user)
+
+            navigate(ROUTES.home)
 
             notify()
           },
