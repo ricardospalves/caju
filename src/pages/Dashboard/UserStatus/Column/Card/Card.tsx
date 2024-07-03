@@ -3,11 +3,13 @@ import {
   HiOutlineUser as UserIcon,
   HiOutlineCalendar as CalendarIcon,
 } from 'react-icons/hi'
-import { toast } from 'react-toastify'
 import { RegistrationCard } from '~/components/RegistrationCard'
 import { deleteRegistrationById } from '~/services/deleteRegistrationById'
 import { updateRegistrationStatusById } from '~/services/updateRegistrationStatusById'
 import { useUserStore } from '~/stores/useUserStore'
+import { CardButton } from './CardButton'
+import { useGlobalConfirmDialog } from '~/stores/useGlobalConfirmDialog'
+import { NOTIFY } from './notify'
 
 export type CardProps = {
   id: string
@@ -19,6 +21,7 @@ export type CardProps = {
 
 export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
   const { deleteUserById, setUserStatusById } = useUserStore((state) => state)
+  const { openDialog, setOnConfirm } = useGlobalConfirmDialog((state) => state)
 
   return (
     <RegistrationCard.Root key={id}>
@@ -41,86 +44,78 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
       <RegistrationCard.ActionsBar>
         {status === 'REVIEW' && (
           <>
-            <RegistrationCard.ActionButton
+            <CardButton
               theme="success"
-              onClick={async () => {
-                const response = await updateRegistrationStatusById(
-                  id,
-                  'APPROVED',
-                )
-                const user = response.data
+              onClick={() => {
+                setOnConfirm(async () => {
+                  const response = await updateRegistrationStatusById(
+                    id,
+                    'APPROVED',
+                  )
+                  const user = response.data
 
-                setUserStatusById(id, user.status)
-                toast.success(
-                  <>
-                    Usuário <strong>{user.employeeName}</strong> movido para o
-                    board{' '}
-                    <strong className="text-approved uppercase">
-                      Aprovado
-                    </strong>
-                    .
-                  </>,
-                )
+                  setUserStatusById(id, user.status)
+                  NOTIFY.userStatusUpdated()
+                })
               }}
             >
               Aprovar
-            </RegistrationCard.ActionButton>
+            </CardButton>
 
-            <RegistrationCard.ActionButton
+            <CardButton
               theme="danger"
-              onClick={async () => {
-                const response = await updateRegistrationStatusById(
-                  id,
-                  'REPROVED',
-                )
-                const user = response.data
+              onClick={() => {
+                setOnConfirm(async () => {
+                  const response = await updateRegistrationStatusById(
+                    id,
+                    'REPROVED',
+                  )
+                  const user = response.data
 
-                setUserStatusById(id, user.status)
-                toast.success(
-                  <>
-                    Usuário <strong>{user.employeeName}</strong> movido para o
-                    board{' '}
-                    <strong className="text-reproved uppercase">
-                      Reprovado
-                    </strong>
-                    .
-                  </>,
-                )
+                  setUserStatusById(id, user.status)
+                  NOTIFY.userStatusUpdated()
+                })
               }}
             >
               Reprovar
-            </RegistrationCard.ActionButton>
+            </CardButton>
           </>
         )}
 
         {status !== 'REVIEW' && (
-          <RegistrationCard.ActionButton
+          <CardButton
             theme="warning"
-            onClick={async () => {
-              const response = await updateRegistrationStatusById(id, 'REVIEW')
-              const user = response.data
+            onClick={() => {
+              setOnConfirm(async () => {
+                const response = await updateRegistrationStatusById(
+                  id,
+                  'REVIEW',
+                )
+                const user = response.data
 
-              setUserStatusById(id, user.status)
-
-              toast.success(
-                <>
-                  Usuário <strong>{user.employeeName}</strong> movido para o
-                  board{' '}
-                  <strong className="text-review uppercase">Revisão</strong>.
-                </>,
-              )
+                setUserStatusById(id, user.status)
+                NOTIFY.userStatusUpdated()
+              })
             }}
           >
             Revisar novamente
-          </RegistrationCard.ActionButton>
+          </CardButton>
         )}
 
         <RegistrationCard.DeleteButton
-          onClick={async () => {
-            const response = await deleteRegistrationById(id)
-            const deletedUser = response.data
+          onClick={() => {
+            openDialog({
+              title: 'Deletar usuário',
+              message: 'Deseja deletar o usuário? Esta ação é irreversível!',
+            })
 
-            deleteUserById(deletedUser.id)
+            setOnConfirm(async () => {
+              const response = await deleteRegistrationById(id)
+              const deletedUser = response.data
+
+              deleteUserById(deletedUser.id)
+              NOTIFY.userDeleted()
+            })
           }}
         />
       </RegistrationCard.ActionsBar>

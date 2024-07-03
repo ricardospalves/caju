@@ -16,6 +16,8 @@ const buttonVariants = tv({
         'text-black bg-green-400 hover:bg-green-600 focus-visible:bg-green-600',
       warning:
         'text-black bg-yellow-400 hover:bg-yellow-600 focus-visible:bg-yellow-600',
+      cancel:
+        'text-white bg-gray-700 hover:bg-gray-900 focus-visible:bg-gray-900',
     },
     size: {
       medium: 'py-2 px-8 text-base',
