@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { CPFField } from '~/components/CPFField/CPFField'
 import { useUserStore } from '~/stores/useUserStore'
+import { removeNonDigits } from '~/utils/removeNonDigits'
 
 export const Search = () => {
   const [cpf, setCpf] = useState('')
   const { filterByCPF } = useUserStore((state) => state)
 
   useEffect(() => {
-    const rawCpf = cpf.replace(/\D/g, '')
+    const rawCpf = removeNonDigits(cpf)
 
     filterByCPF(rawCpf)
   }, [cpf, filterByCPF])

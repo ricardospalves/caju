@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { Fields } from './Fields'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '~/constants/routes'
+import { removeNonDigits } from '~/utils/removeNonDigits'
 
 export const Form = () => {
   const navigate = useNavigate()
@@ -23,7 +24,8 @@ export const Form = () => {
         className="grid gap-4"
         onSubmit={handleSubmit(
           async ({ admissionDate, email, employeeName, cpf }: FormFields) => {
-            cpf = (cpf as string).replace(/\D/g, '')
+            cpf = removeNonDigits(cpf)
+
             const user = new User({
               admissionDate,
               email,
