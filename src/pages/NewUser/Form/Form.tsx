@@ -34,7 +34,7 @@ export const Form = () => {
 
             await postRegistration(user)
 
-            navigate(ROUTES.home)
+            navigate(ROUTES.dashboard)
 
             notify()
           },

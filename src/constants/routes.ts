@@ -1,4 +1,4 @@
 export const ROUTES = {
-  home: '/',
+  dashboard: '/',
   newUser: '/nova-admissao',
 } as const
