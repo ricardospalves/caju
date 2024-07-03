@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type OpenDialogArguments = {
+export type OpenDialogArguments = {
   title: string
   message: string
 }

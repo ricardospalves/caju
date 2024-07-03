@@ -5,7 +5,6 @@ import {
 } from 'react-icons/hi'
 import { RegistrationCard } from '~/components/RegistrationCard'
 import { deleteRegistrationById } from '~/services/deleteRegistrationById'
-import { updateRegistrationStatusById } from '~/services/updateRegistrationStatusById'
 import { useUserStore } from '~/stores/useUserStore'
 import { CardButton } from './CardButton'
 import { useGlobalConfirmDialog } from '~/stores/useGlobalConfirmDialog'
@@ -20,7 +19,7 @@ export type CardProps = {
 }
 
 export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
-  const { deleteUserById, setUserStatusById } = useUserStore((state) => state)
+  const { deleteUserById } = useUserStore((state) => state)
   const { openDialog, setOnConfirm } = useGlobalConfirmDialog((state) => state)
 
   return (
@@ -44,69 +43,19 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
       <RegistrationCard.ActionsBar>
         {status === 'REVIEW' && (
           <>
-            <CardButton
-              theme="success"
-              onClick={() => {
-                setOnConfirm(async () => {
-                  const response = await updateRegistrationStatusById(
-                    id,
-                    'APPROVED',
-                  )
-                  const user = response.data
-
-                  setUserStatusById(id, user.status)
-                  NOTIFY.userStatusUpdated()
-                })
-              }}
-            >
-              Aprovar
-            </CardButton>
-
-            <CardButton
-              theme="danger"
-              onClick={() => {
-                setOnConfirm(async () => {
-                  const response = await updateRegistrationStatusById(
-                    id,
-                    'REPROVED',
-                  )
-                  const user = response.data
-
-                  setUserStatusById(id, user.status)
-                  NOTIFY.userStatusUpdated()
-                })
-              }}
-            >
-              Reprovar
-            </CardButton>
+            <CardButton status="APPROVED" userId={id} />
+            <CardButton status="REPROVED" userId={id} />
           </>
         )}
 
-        {status !== 'REVIEW' && (
-          <CardButton
-            theme="warning"
-            onClick={() => {
-              setOnConfirm(async () => {
-                const response = await updateRegistrationStatusById(
-                  id,
-                  'REVIEW',
-                )
-                const user = response.data
-
-                setUserStatusById(id, user.status)
-                NOTIFY.userStatusUpdated()
-              })
-            }}
-          >
-            Revisar novamente
-          </CardButton>
-        )}
+        {status !== 'REVIEW' && <CardButton status="REVIEW" userId={id} />}
 
         <RegistrationCard.DeleteButton
           onClick={() => {
             openDialog({
               title: 'Deletar usuário',
-              message: 'Deseja deletar o usuário? Esta ação é irreversível!',
+              message:
+                'Tem certeza que deseja deletar o usuário? Esta ação é irreversível!',
             })
 
             setOnConfirm(async () => {
