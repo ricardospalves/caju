@@ -38,38 +38,38 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
       </RegistrationCard.List>
 
       <RegistrationCard.ActionsBar>
-        {status !== 'REPROVED' && (
-          <RegistrationCard.ActionButton
-            theme="danger"
-            onClick={async () => {
-              const response = await updateRegistrationStatusById(
-                id,
-                'REPROVED',
-              )
-              const user = response.data
+        {status === 'REVIEW' && (
+          <>
+            <RegistrationCard.ActionButton
+              theme="success"
+              onClick={async () => {
+                const response = await updateRegistrationStatusById(
+                  id,
+                  'APPROVED',
+                )
+                const user = response.data
 
-              setUserStatusById(id, user.status)
-            }}
-          >
-            Reprovar
-          </RegistrationCard.ActionButton>
-        )}
+                setUserStatusById(id, user.status)
+              }}
+            >
+              Aprovar
+            </RegistrationCard.ActionButton>
 
-        {status !== 'APPROVED' && (
-          <RegistrationCard.ActionButton
-            theme="success"
-            onClick={async () => {
-              const response = await updateRegistrationStatusById(
-                id,
-                'APPROVED',
-              )
-              const user = response.data
+            <RegistrationCard.ActionButton
+              theme="danger"
+              onClick={async () => {
+                const response = await updateRegistrationStatusById(
+                  id,
+                  'REPROVED',
+                )
+                const user = response.data
 
-              setUserStatusById(id, user.status)
-            }}
-          >
-            Aprovar
-          </RegistrationCard.ActionButton>
+                setUserStatusById(id, user.status)
+              }}
+            >
+              Reprovar
+            </RegistrationCard.ActionButton>
+          </>
         )}
 
         {status !== 'REVIEW' && (
