@@ -12,7 +12,7 @@ export const Fields = () => {
   return (
     <>
       <TextField
-        label="Nome"
+        label="Nome completo"
         {...register('employeeName')}
         errorMessage={errors.employeeName?.message}
       />
