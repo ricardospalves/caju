@@ -3,6 +3,8 @@ import { CPFField } from '~/components/CPFField/CPFField'
 import { TextField } from '~/components/TextField'
 import { FormFields } from '../schema'
 
+const TODAY = new Date().toISOString().split('T')[0]
+
 export const Fields = () => {
   const {
     register,
@@ -33,6 +35,7 @@ export const Fields = () => {
       <TextField
         label="Data de admissão"
         type="date"
+        max={TODAY}
         {...register('admissionDate')}
         errorMessage={errors.admissionDate?.message}
       />

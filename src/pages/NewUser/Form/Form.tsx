@@ -9,6 +9,7 @@ import { Fields } from './Fields'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '~/constants/routes'
 import { removeNonDigits } from '~/utils/removeNonDigits'
+import { format } from 'date-fns'
 
 export const Form = () => {
   const navigate = useNavigate()
@@ -25,6 +26,7 @@ export const Form = () => {
         onSubmit={handleSubmit(
           async ({ admissionDate, email, employeeName, cpf }: FormFields) => {
             cpf = removeNonDigits(cpf)
+            admissionDate = format(new Date(admissionDate), 'dd/MM/yyyy')
 
             const user = new User({
               admissionDate,
