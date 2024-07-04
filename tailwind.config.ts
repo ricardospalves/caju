@@ -15,6 +15,9 @@ export default {
         approved: '#4242df',
         reproved: '#ce2893',
       },
+      fontFamily: {
+        body: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],
