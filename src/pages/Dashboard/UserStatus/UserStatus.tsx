@@ -12,19 +12,19 @@ export const UserStatus = () => {
       <Column
         title="Pronto para revisar"
         status={GLOBAL_STATUS.pending}
-        users={filterUsersByStatus(userColumns, 'REVIEW')}
+        users={filterUsersByStatus(userColumns, GLOBAL_STATUS.pending)}
       />
 
       <Column
         title="Aprovado"
         status={GLOBAL_STATUS.accepted}
-        users={filterUsersByStatus(userColumns, 'APPROVED')}
+        users={filterUsersByStatus(userColumns, GLOBAL_STATUS.accepted)}
       />
 
       <Column
         title="Reprovado"
         status={GLOBAL_STATUS.rejected}
-        users={filterUsersByStatus(userColumns, 'REPROVED')}
+        users={filterUsersByStatus(userColumns, GLOBAL_STATUS.rejected)}
       />
     </div>
   )

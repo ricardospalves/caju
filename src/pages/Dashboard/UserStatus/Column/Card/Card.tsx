@@ -9,6 +9,7 @@ import { useUserStore } from '~/stores/useUserStore'
 import { CardButton } from './CardButton'
 import { useGlobalConfirmDialog } from '~/stores/useGlobalConfirmDialog'
 import { NOTIFY } from './notify'
+import { GLOBAL_STATUS } from '~/constants/globalStatus'
 
 export type CardProps = {
   id: string
@@ -43,12 +44,14 @@ export const Card = ({ id, admissionDate, email, name, status }: CardProps) => {
       <RegistrationCard.ActionsBar>
         {status === 'REVIEW' && (
           <>
-            <CardButton status="APPROVED" userId={id} />
-            <CardButton status="REPROVED" userId={id} />
+            <CardButton status={GLOBAL_STATUS.accepted} userId={id} />
+            <CardButton status={GLOBAL_STATUS.rejected} userId={id} />
           </>
         )}
 
-        {status !== 'REVIEW' && <CardButton status="REVIEW" userId={id} />}
+        {status !== 'REVIEW' && (
+          <CardButton status={GLOBAL_STATUS.pending} userId={id} />
+        )}
 
         <RegistrationCard.DeleteButton
           onClick={() => {
