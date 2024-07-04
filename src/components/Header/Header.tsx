@@ -8,7 +8,7 @@ export const Header = ({ className }: HeaderProps) => {
   return (
     <header
       className={classNames([
-        'h-16 flex items-center sticky top-0 px-6 bg-cajuPrimary bg-gradient-to-r from-transparent to-cajuSecondary text-white',
+        'h-16 flex items-center lg:sticky lg:top-0 px-6 bg-cajuPrimary bg-gradient-to-r from-transparent to-cajuSecondary text-white',
         className,
       ])}
     >

@@ -1,23 +1,29 @@
 import { useUserStore } from '~/stores/useUserStore'
 import { Column } from './Column'
 import { filterUsersByStatus } from '~/utils/filterUsersByStatus'
+import { GLOBAL_STATUS } from '~/constants/globalStatus'
 
 export const UserStatus = () => {
   const { users, filteredUsers } = useUserStore((state) => state)
   const userColumns = filteredUsers || users
 
   return (
-    <div className="flex lg:grid lg:grid-cols-3 gap-2 lg:gap-4 p-1 sm:p-4 overflow-auto">
+    <div className="grid lg:grid-cols-3 gap-0 lg:gap-4 lg:p-4">
       <Column
-        status="review"
+        title="Pronto para revisar"
+        status={GLOBAL_STATUS.pending}
         users={filterUsersByStatus(userColumns, 'REVIEW')}
       />
+
       <Column
-        status="approved"
+        title="Aprovado"
+        status={GLOBAL_STATUS.accepted}
         users={filterUsersByStatus(userColumns, 'APPROVED')}
       />
+
       <Column
-        status="reproved"
+        title="Reprovado"
+        status={GLOBAL_STATUS.rejected}
         users={filterUsersByStatus(userColumns, 'REPROVED')}
       />
     </div>

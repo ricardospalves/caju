@@ -17,7 +17,7 @@ export const DashboardPage = () => {
   }, [setUsers])
 
   return (
-    <main className="lg:grow grid lg:grid-rows-[auto_minmax(0,1fr)] gap-16">
+    <main className="lg:grow grid lg:grid-rows-[auto_minmax(0,1fr)] gap-8 lg:gap-16">
       <ActionBar />
       <UserStatus />
     </main>
