@@ -2,7 +2,7 @@ import type { VariantProps } from 'tailwind-variants'
 
 import { ButtonHTMLAttributes } from 'react'
 import { tv } from 'tailwind-variants'
-import { ButtonSlot, type AsChildProps } from './ButtonSlot.tsx'
+import { ButtonSlot, type AsChildProps } from './ButtonSlot'
 import { classNames } from '~/utils/classNames'
 
 const buttonVariants = tv({
