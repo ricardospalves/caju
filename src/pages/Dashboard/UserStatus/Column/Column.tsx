@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 import { Card } from './Card'
 import { GLOBAL_STATUS } from '~/constants/globalStatus'
 import { useState } from 'react'
-import { classNames } from '~/utils/class-names'
+import { classNames } from '~/utils/classNames'
 import { MdExpandMore as ChevronDownIcon } from 'react-icons/md'
 
 type VariantsStatus = Record<Status, string>

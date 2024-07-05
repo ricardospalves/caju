@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, forwardRef, useId } from 'react'
-import { classNames } from '~/utils/class-names'
+import { classNames } from '~/utils/classNames'
 
 type NativeProps = InputHTMLAttributes<HTMLInputElement>
 

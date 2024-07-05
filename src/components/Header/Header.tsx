@@ -1,4 +1,4 @@
-import { classNames } from '~/utils/class-names'
+import { classNames } from '~/utils/classNames'
 
 export type HeaderProps = {
   className?: string

@@ -3,7 +3,7 @@ import type { VariantProps } from 'tailwind-variants'
 import { ButtonHTMLAttributes } from 'react'
 import { tv } from 'tailwind-variants'
 import { ButtonSlot, type AsChildProps } from './ButtonSlot.tsx'
-import { classNames } from '~/utils/class-names.ts'
+import { classNames } from '~/utils/classNames'
 
 const buttonVariants = tv({
   base: 'inline-flex items-center justify-center rounded-full cursor-pointer text-center font-semibold transition-colors focus:outline-none focus:ring focus:ring-cajuPrimary/25',
